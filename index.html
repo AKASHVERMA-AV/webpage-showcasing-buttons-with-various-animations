@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Animations & Factorial Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+        header {
+            background-color: #0078d7;
+            color: white;
+            padding: 20px;
+        }
+        .button-container {
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .button:active {
+            transform: scale(0.9);
+            background-color: #005fa3;
+        }
+        .factorial-container {
+            margin: 20px auto;
+            max-width: 400px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .factorial-container input, .factorial-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .factorial-container button {
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .factorial-container button:hover {
+            background-color: #005fa3;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Button Animations & Factorial Calculator</h1>
+    </header>
+    <section class="button-container">
+        <button class="button" style="background-color: #ff6f61;">Hover Me</button>
+        <button class="button" style="background-color: #6bcf63;">Click Me</button>
+        <button class="button" style="background-color: #fdd835;">Another Button</button>
+        <button class="button" style="background-color: #8c61ff;">Try This</button>
+    </section>
+    <section class="factorial-container">
+        <h2>Factorial Calculator</h2>
+        <input type="number" id="numberInput" placeholder="Enter a positive integer" min="0">
+        <button onclick="calculateFactorial('iterative')">Calculate Iteratively</button>
+        <button onclick="calculateFactorial('recursive')">Calculate Recursively</button>
+        <div class="result" id="result"></div>
+    </section>
+    <script>
+        function calculateFactorial(method) {
+            const input = document.getElementById('numberInput').value;
+            const resultDiv = document.getElementById('result');
+            const num = parseInt(input);
+
+            if (isNaN(num) || num < 0) {
+                resultDiv.textContent = 'Please enter a valid positive integer.';
+                return;
+            }
+
+            let factorial;
+
+            if (method === 'iterative') {
+                factorial = factorialIterative(num);
+            } else {
+                factorial = factorialRecursive(num);
+            }
+
+            resultDiv.textContent = `Factorial of ${num} (${method}): ${factorial}`;
+        }
+
+        function factorialIterative(n) {
+            let result = 1;
+            for (let i = 1; i <= n; i++) {
+                result *= i;
+            }
+            return result;
+        }
+
+        function factorialRecursive(n) {
+            if (n === 0 || n === 1) return 1;
+            return n * factorialRecursive(n - 1);
+        }
+    </script>
+</body>
+</html>
